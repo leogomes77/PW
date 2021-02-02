@@ -10,6 +10,7 @@
     padding-top: 50px;
     padding-bottom: 25px;
     column-span: 10px;
+    row-gap: 15px;
 }
 
 .right{

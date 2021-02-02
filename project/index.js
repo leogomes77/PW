@@ -67,12 +67,18 @@ function criarImagem(imagem) {      //Criar Imagem
     var imgSrc = imagem.urls.raw + "&fit=crop&w=500&h=500";
     img.setAttribute("src", imgSrc);
 
-    // criar div pai
+    // criar div card
+    var divcard = document.createElement("div");
+    divcard.className = "card nopadding  right";  // Small - col-sm-5 | Medium - col-md-4 | Large - col-lg-3
+    divcard.appendChild(img);
+    divcard.appendChild(div);
+    divcard.appendChild(btn);
+
+    //criar div
     var divPrincipal = document.createElement("div");
-    divPrincipal.className = "card col-lg-3 col-md-4 col-sm-5 nopadding ";  // Small - col-sm-5 | Medium - col-md-4 | Large - col-lg-3
-    divPrincipal.appendChild(img);
-    divPrincipal.appendChild(div);
-    divPrincipal.appendChild(btn);
+    divPrincipal.className = "col-lg-3 col-md-4 col-sm-5";  // Small - col-sm-5 | Medium - col-md-4 | Large - col-lg-3
+    divPrincipal.appendChild(divcard);
+
 
     // adicionar div pai à pagina/DOM
     var container = document.getElementById("contentorImagens");
@@ -94,7 +100,6 @@ function criarImagem(imagem) {      //Criar Imagem
             addImagens(data);
         }
     })
-
 } */
 
 //Button anterior
