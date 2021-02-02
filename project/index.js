@@ -1,4 +1,5 @@
-var pagina = 2;
+var pagina = 1;
+
 
 function procura() { //Ligacao api
     var endereco = 'https://api.unsplash.com/photos?per_page=24&page=2&order_by=latest&page='
@@ -109,8 +110,9 @@ function criarImagem(imagem) {      //Criar Imagem
 
 //Button anterior
 function anterior() {
-    if (pagina == 1)
+    if (pagina == 1){
         alert("Está na pagina inicial");
+    }
     else {
         pagina = pagina - 1;
         procura();
@@ -119,13 +121,19 @@ function anterior() {
 
 //Button seguinte
 function seguinte() {
-    pagina = pagina + 1;
-    procura();
+
+    if(pagina >= 50){ //Numero max paginas (POR FAZER)
+        alert("ja foste");
+    }
+    else{
+        pagina = pagina + 1;
+        procura();
+    }
 }
 
-function programarBotaoSearch() {
+/*function programarBotaoSearch() {
     $('#searchbutton').on("click", search);
-}
+} */
 
 function programarCarregamentoPagina() {
     $(window).on("load", procura);
@@ -140,5 +148,5 @@ function programarBotoesPaginacao() {
 }
 
 programarCarregamentoPagina();
-programarBotaoSearch();
 programarBotoesPaginacao();
+/*programarBotoesPaginacao(); */

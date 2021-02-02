@@ -12,15 +12,41 @@
     margin-bottom: 10px;
 }
 .row{
-    padding-top: 50px;
-    padding-bottom: 25px;
+    padding-top: 90px;
+    padding-bottom: 75px;
     column-span: 10px;
     row-gap: 15px;
+}
+
+.page-link{
+    color: black;
+}
+.page-link:hover {
+    color: black ;
 }
 
 .right{
     float: right;
 }
+
+.pagination{
+    position: fixed;
+    bottom: 0;
+    margin-left: 570px;
+}
+
+.navbar{
+   position: fixed;
+   top: 0;
+   width: 100%;
+   background-color: whitesmoke;
+   overflow: hidden;
+}
+
+.left{
+    padding-left: 15px;
+}
+
 
 .color{
     color: grey;
