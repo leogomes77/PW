@@ -123,7 +123,7 @@ function anterior() {
 function seguinte() {
 
     if(pagina >= 50){ //Numero max paginas (POR FAZER)
-        alert("ja foste");
+        alert("Está na ultima pagina");
     }
     else{
         pagina = pagina + 1;
