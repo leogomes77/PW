@@ -32,13 +32,13 @@ function criarImagem(imagem) {      //Criar Imagem
 
     //criar icon
     var i = document.createElement("a");
-    i.className = "fa fa-download color right";
+    i.className = "fa fa-download color";
     var link = imagem.urls.regular;
     var tab = "_blank";
     i.setAttribute("target", tab);
     i.setAttribute("href", link);
 
-    //criar buttao download
+    //criar button download
     var btn = document.createElement("button");
     btn.className = "btn btn-light";
     btn.appendChild(i);
@@ -51,12 +51,17 @@ function criarImagem(imagem) {      //Criar Imagem
 
     // criar h6
     var h6 = document.createElement("h6");
-    h6.className = "card-title";
+    h6.className = "card-description";
     h6.innerText = imagem.description;
+
+    //criar div button
+    var divb = document.createElement("div");
+    divb.className = "card-bottom";
+    divb.appendChild(btn);
 
     // criar div filha
     var div = document.createElement("div");
-    div.className = "card-body ";
+    div.className = "card-body";
     div.appendChild(h5);
     div.appendChild(h6);
 
@@ -69,10 +74,10 @@ function criarImagem(imagem) {      //Criar Imagem
 
     // criar div card
     var divcard = document.createElement("div");
-    divcard.className = "card nopadding  right";  // Small - col-sm-5 | Medium - col-md-4 | Large - col-lg-3
+    divcard.className = "card nopadding";  // Small - col-sm-5 | Medium - col-md-4 | Large - col-lg-3
     divcard.appendChild(img);
     divcard.appendChild(div);
-    divcard.appendChild(btn);
+    divcard.appendChild(divb);
 
     //criar div
     var divPrincipal = document.createElement("div");
