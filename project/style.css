@@ -1,0 +1,42 @@
+.form-inline{
+    display: flex;
+    align-items: center;
+}
+
+.card-margin {
+    margin-bottom: 10px;
+}
+.row{
+    padding-top: 50px;
+    padding-bottom: 25px;
+    column-span: 10px;
+}
+
+.right{
+    float: right;
+}
+
+.color{
+    color: grey;
+}
+
+.color:hover {
+    color: black ;
+}
+
+h5 {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+h6{
+    padding-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.nopadding{  /*tirar o padding da coluna */
+    /*padding: 0 !important; */
+    padding: 0 !important ;
+    margin: 0 !important;
+}

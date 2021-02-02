@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Download Images </title>
+  <meta name="author" content=" Grupo 9">
+  <meta name="description" content="Download Images from API">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="icon" href="./icon.png">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css"> 
+</head>
+<body>
+
+<!--NavBar-->
+
+  <nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="navbar-brand" href="#">
+        <i class="fas fa-hat-wizard flex"> ImageWizard </i>
+      </a>
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" id="inputtext" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" id="searchbutton"type="submit">GO!</button>
+    </form>
+  </nav>
+
+  <!-- Imagens-->
+  <div class="container">
+    <div class="row" id="contentorImagens"></div>
+
+
+
+    <!--Paginacao-->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center fixed">
+        <li class="page-item"><a class="page-link" href="#" id="anterior">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#" id="seguinte">Next</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  <script src="index.js"></script>
+</body>
+</html>
