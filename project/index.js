@@ -1,4 +1,4 @@
-var pagina = 2;
+var pagina = 1;
 
 function procura() { //Ligacao API
     var endereco = 'https://api.unsplash.com/photos?per_page=24&page=2&order_by=latest&page='
@@ -15,8 +15,8 @@ function procura() { //Ligacao API
     });
 }
 
-//Procurar
 
+//Procurar 
 function search() {
     var inputText = document.getElementById("inputtext");
     var endereco = 'https://api.unsplash.com/search/photos?query=';
@@ -37,16 +37,12 @@ function search() {
             type: "GET",
             async: true,
             success: function (data, status, response) {
-                if (data.results == null) {
+                if (data.value == 0) {
                     $('#contentorImagens').empty();
-                    Swal.fire(
-                        'ERROR!',
-                        'Encontra-se na página inicial',
-                        'error'
-                    )
+                    alert("jorge")
                 }
                 else {
-                    Imagensprocurar(data);
+                    Imagensprocurar(data);           
                 }
             },
         });
@@ -54,7 +50,8 @@ function search() {
 }
 
 
-function addImagens(data) { //Buscar todos os dados a API
+//Buscar todos os dados a API
+function addImagens(data) { 
     $('#contentorImagens').empty();
 
     var arrayDeImagens = data;
@@ -64,7 +61,9 @@ function addImagens(data) { //Buscar todos os dados a API
     }
 }
 
-function Imagensprocurar(data) { //Buscar os dados consoante o que eu escrevo 
+
+//Buscar os dados consoante o que eu escrevo 
+function Imagensprocurar(data) { 
     $('#contentorImagens').empty();
 
     var arrayDeImagens = data;
@@ -162,24 +161,17 @@ function anterior() {
 
 //Button seguinte
 function seguinte(data) {
-    var inputText = document.getElementById("inputtext");
-    var endereco = 'https://api.unsplash.com/search/photos?query=';
-    var clienteAPI = '&client_id=dd4e1cb73ca3a1036d4e98d26f72a439141dc17039e1ae79b7bc2a23f3488578';
-    var url = endereco + inputText.value + clienteAPI;
-    $.ajax({
-        url: url,
-        type: "GET",
-        async: true,
-        success: function (data, status, response) {
-            if (pagina >= data.results) { //Numero max paginas (POR FAZER)
-                alert("Está na ultima pagina");
-            }
-            else {
-                pagina = pagina + 1;
-                procura();
-            }
-        },
-    });
+    if (pagina == 50) { //Numero max paginas (POR FAZER)
+        Swal.fire(
+            'ERRO',
+            'Encontra-se na ultima pagina',
+            'error'
+        )
+    }
+    else {
+        pagina = pagina + 1;
+        procura();
+    }
 }
 
 
