@@ -154,7 +154,6 @@ h6{
 
 
 .nopadding{  /*tirar o padding da coluna */
-    /*padding: 0 !important; */
     padding: 0 !important ;
     margin: 0 !important;
 }

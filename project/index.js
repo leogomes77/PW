@@ -1,6 +1,8 @@
 var pagina = 1;
 
-function procura() { //Ligacao API
+
+//Ligacao API
+function procura() {
     var endereco = 'https://api.unsplash.com/photos?per_page=24&page=2&order_by=latest&page='
     var clienteAPI = '&client_id=dd4e1cb73ca3a1036d4e98d26f72a439141dc17039e1ae79b7bc2a23f3488578'
     var enderecoPagina = endereco + pagina + clienteAPI;
@@ -16,7 +18,7 @@ function procura() { //Ligacao API
 }
 
 
-//Procurar 
+//Procurar dados na API consoante o que está escrito na SearchBox
 function search() {
     var inputText = document.getElementById("inputtext");
     var endereco = 'https://api.unsplash.com/search/photos?query=';
@@ -38,7 +40,7 @@ function search() {
             type: "GET",
             async: true,
             success: function (data, status, response) {;
-                if (data.total == 0) {
+                if (data.total == 0) { 
                     $('#contentorImagens').empty(); //Contentor de Imagens Vazio
                     $("#page").css("display", "none"); //Retiar os buttons de paginacao
                     $("#notfound").css("display", "inline");  //Por a class notfound visivel
@@ -64,7 +66,7 @@ function addImagens(data) {
 }
 
 
-//Buscar os dados consoante o que eu escrevo 
+//Buscar os dados consoante o que esta escrito na searchbox
 function Imagensprocurar(data) { 
     $('#contentorImagens').empty();
 
@@ -79,68 +81,68 @@ function Imagensprocurar(data) {
 //Criar Imagem
 function criarImagem(imagem) {      
 
-    //criar icon
+    //Criar icon
     var i = document.createElement("a");
     i.className = "fa fa-download color";
     var link = imagem.urls.regular;
     var tab = "_blank";
     i.setAttribute("target", tab); //Abrir uma nova aba
-    i.setAttribute("href", link); //Referencia
+    i.setAttribute("href", link); //Referencia/Link
 
 
-    //criar button download
+    //Criar button download
     var btn = document.createElement("button");
     btn.className = "btn btn-light";
     btn.appendChild(i);
 
 
-    // criar h5
+    //Criar h5
     var h5 = document.createElement("h5");
     h5.className = "card-title";
     h5.innerText = imagem.user.name;
 
 
-    // criar h6
+    //Criar h6
     var h6 = document.createElement("h6");
     h6.className = "card-description";
     h6.innerText = imagem.description;
 
 
-    //criar div button
+    //Criar div button
     var divb = document.createElement("div");
     divb.className = "card-bottom";
     divb.appendChild(btn);
 
 
-    // criar div filha
+    //Criar div filha
     var div = document.createElement("div");
     div.className = "card-body";
     div.appendChild(h5);
     div.appendChild(h6);
 
 
-    // criar img
+    //Criar img
     var img = document.createElement("img");
     img.className = "card-img-top";
-    var imgSrc = imagem.urls.raw + "&fit=crop&w=500&h=500";
+    var imgSrc = imagem.urls.raw + "&fit=crop&w=500&h=500"; 
     img.setAttribute("src", imgSrc);
 
 
-    // criar div card
+    //Criar div card
     var divcard = document.createElement("div");
-    divcard.className = "card nopadding";  // Small - col-sm-5 | Medium - col-md-4 | Large - col-lg-3
+    divcard.className = "card nopadding";  //nopadding para a imagem ocupar a card toda
     divcard.appendChild(img);
     divcard.appendChild(div);
     divcard.appendChild(divb);
 
 
-    //criar div
+    //Criar div
     var divPrincipal = document.createElement("div");
-    divPrincipal.className = "col-lg-3 col-md-4 col-sm-6";  // Small - col-sm-5 | Medium - col-md-4 | Large - col-lg-3
+    divPrincipal.className = "col-lg-3 col-md-4 col-sm-6";  // Small - col-sm-6 | Medium - col-md-4 | Large - col-lg-3
     divPrincipal.appendChild(divcard);
 
 
-    // adicionar div pai à pagina/DOM
+    //Adicionar div pai à pagina/DOM
     var container = document.getElementById("contentorImagens");
     container.appendChild(divPrincipal);
 }
@@ -149,7 +151,7 @@ function criarImagem(imagem) {
 //Button anterior
 function anterior() {
     if (pagina == 1) {
-        Swal.fire(
+        Swal.fire( 
             'ERRO',
             'Encontra-se na página inicial',
             'error'
@@ -162,7 +164,7 @@ function anterior() {
 }
 
 
-//Refresh Page
+//Refresh à página
 function refreshPage(){
     location.reload();
 }
@@ -190,12 +192,12 @@ function programarButtonSearch() {
 }
 
 
-//Load da pagina
+//Carregar a pagina com os dados da API
 function programarCarregamentoPagina() {
     $(window).on("load", procura);
 }
 
-//button refresh
+//Button refresh
 function programarRefresh() {
     $('#notfoundb').on("click", refreshPage);
 }
