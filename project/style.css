@@ -3,20 +3,26 @@
     align-items: center;
 }
 
+
 .btn{
     float:right;
     margin-right: 15px;
     margin-bottom: 15px;
 }
+
+
 .card-margin {
     margin-bottom: 10px;
 }
+
+
 .row{
     padding-top: 90px;
     padding-bottom: 75px;
     column-span: 10px;
     row-gap: 15px;
 }
+
 
 .page-link{
     color: black;
@@ -25,15 +31,27 @@
     color: black ;
 }
 
+
 .right{
     float: right;
 }
 
+
+@media only screen and (min-width : 500px) {
+
+    .container { max-width: 1700px; } 
+} 
+
+
 .pagination{
+    margin: -20px -50px; 
+    position:relative;
+    top:95%; 
+    left:48.3%;
     position: fixed;
     bottom: 0;
-    margin-left: 570px;
 }
+
 
 .navbar{
    position: fixed;
@@ -42,6 +60,7 @@
    background-color: whitesmoke;
    overflow: hidden;
 }
+
 
 .left{
     padding-left: 15px;
@@ -52,9 +71,11 @@
     color: grey;
 }
 
+
 .color:hover {
     color: black ;
 }
+
 
 h5 {
     padding-top: 10px;
@@ -63,11 +84,13 @@ h5 {
     font-weight: bold;
 }
 
+
 h6{
     padding-left: 10px;
     padding-top: 10px;
     font-family: Arial, Helvetica, sans-serif;
 }
+
 
 .nopadding{  /*tirar o padding da coluna */
     /*padding: 0 !important; */
