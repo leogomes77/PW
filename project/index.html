@@ -35,7 +35,7 @@
 
 
     <!--Paginacao-->
-    <nav aria-label="Page navigation example center">
+    <nav aria-label="Page navigation example center" id="page">
       <ul class="pagination justify-content-center fixed">
         <li class="page-item"><a class="page-link" href="#" id="anterior">Previous</a></li>
         <li class="page-item"><a class="page-link" href="#" id="seguinte">Next</a></li>
@@ -43,16 +43,19 @@
     </nav>
   </div>
 
-
-  <div class="xx" id="myxx">
-      <p>Nothing to show here</p>
-      <i class="fa fa-ban" aria-hidden="true"></i>
-      <p>results</p>
+<!--Not Found-->
+  <div class="notfound" id="notfound">
+    <div class="center">
+      <h2>Nothing to show here :/</h2>
+      <h1>Ø</h1>
+      <h2>results</h2>
+      <a href="#" id="notfoundb">Go back home</a>
+    </div>
   </div>
 
 <!--Modal-->
   <div class="modal" id="myModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Search Error</h5>

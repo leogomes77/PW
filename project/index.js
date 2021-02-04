@@ -20,8 +20,9 @@ function procura() { //Ligacao API
 function search() {
     var inputText = document.getElementById("inputtext");
     var endereco = 'https://api.unsplash.com/search/photos?query=';
+    var page = '&per_page=24'
     var clienteAPI = '&client_id=dd4e1cb73ca3a1036d4e98d26f72a439141dc17039e1ae79b7bc2a23f3488578';
-    var url = endereco + inputText.value + clienteAPI;
+    var url = endereco + inputText.value + page+ pagina+ clienteAPI;
     if (inputText.value == "") {
         $('#myModal').modal('show')   //Aparecer o modal
         $('#closeModal').click(function () {  //Fechar o modal com o close
@@ -38,11 +39,12 @@ function search() {
             async: true,
             success: function (data, status, response) {;
                 if (data.total == 0) {
-                    $('#contentorImagens').empty();
-                    $('#myxx').modal('show');
+                    $('#contentorImagens').empty(); //Contentor de Imagens Vazio
+                    $("#page").css("display", "none"); //Retiar os buttons de paginacao
+                    $("#notfound").css("display", "inline");  //Por a class notfound visivel
                 }
                 else {
-                    Imagensprocurar(data);           
+                    Imagensprocurar(data);     
                 }
             },
         });
@@ -143,6 +145,7 @@ function criarImagem(imagem) {
     container.appendChild(divPrincipal);
 }
 
+
 //Button anterior
 function anterior() {
     if (pagina == 1) {
@@ -159,8 +162,14 @@ function anterior() {
 }
 
 
+//Refresh Page
+function refreshPage(){
+    location.reload();
+}
+
+
 //Button seguinte
-function seguinte(data) {
+function seguinte() {
     if (pagina == 50) { //Numero max paginas (POR FAZER)
         Swal.fire(
             'ERRO',
@@ -186,6 +195,11 @@ function programarCarregamentoPagina() {
     $(window).on("load", procura);
 }
 
+//button refresh
+function programarRefresh() {
+    $('#notfoundb').on("click", refreshPage);
+}
+
 
 //Buttons paginacao
 function programarBotoesPaginacao() {
@@ -200,3 +214,4 @@ function programarBotoesPaginacao() {
 programarCarregamentoPagina();
 programarBotoesPaginacao();
 programarButtonSearch(); 
+programarRefresh();
