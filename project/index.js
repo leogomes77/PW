@@ -36,10 +36,10 @@ function search() {
             url: url,
             type: "GET",
             async: true,
-            success: function (data, status, response) {
-                if (data.value == 0) {
+            success: function (data, status, response) {;
+                if (data.total == 0) {
                     $('#contentorImagens').empty();
-                    alert("jorge")
+                    $('#myxx').modal('show');
                 }
                 else {
                     Imagensprocurar(data);           
