@@ -4,21 +4,21 @@ var x = 0; //Variavel para paginação correta caso esteja a fazer search de uma
 
 //Ligacao API
 function procura() {
-    if(x != 0){   //Se clicar no button GO ele vai  retornar o x=1
+    if (x != 0) {   //Se clicar no button GO ele vai  retornar o x=1
         search();
     }
-    else{  //Vai estar sempre a fazer esta função enquanto eu nao clicar no button go
-    var endereco = 'https://api.unsplash.com/photos?per_page=24&page=1&order_by=latest&page='
-    var clienteAPI = '&client_id=7gq1AYl7h4F_zZHQvKnRRRFsl--G2xF16WueDwb77zA'
-    var enderecoPagina = endereco + pagina + clienteAPI;
-    $.ajax({
-        url: enderecoPagina,
-        type: "get",
-        async: true,
-        success: function (data, status, response) {
-            addImagens(data);
-        }
-    });
+    else {  //Vai estar sempre a fazer esta função enquanto eu nao clicar no button go
+        var endereco = 'https://api.unsplash.com/photos?per_page=24&page=1&order_by=latest&page='
+        var clienteAPI = '&client_id=7gq1AYl7h4F_zZHQvKnRRRFsl--G2xF16WueDwb77zA'
+        var enderecoPagina = endereco + pagina + clienteAPI;
+        $.ajax({
+            url: enderecoPagina,
+            type: "get",
+            async: true,
+            success: function (data, status, response) {
+                addImagens(data);
+            }
+        });
     }
 }
 
@@ -27,7 +27,7 @@ function procura() {
 function search() {
     var inputText = document.getElementById("inputtext");
     var endereco = 'https://api.unsplash.com/search/photos?query=';
-    var page = '&per_page=24page=2&order_by=latest&page='
+    var page = '&per_page=24page=1&order_by=latest&page='
     var clienteAPI = '&client_id=7gq1AYl7h4F_zZHQvKnRRRFsl--G2xF16WueDwb77zA';
     var url = endereco + inputText.value + page + pagina + clienteAPI;
     if (inputText.value == "") {
@@ -38,20 +38,20 @@ function search() {
         $('#closeModall').click(function () {  //Fechar o modal com o x
             $('#myModal').modal('hide');
         })
-    } 
+    }
     else {
         $.ajax({
             url: url,
             type: "GET",
             async: true,
-            success: function (data, status, response) {;
+            success: function (data, status, response) {
                 if (data.total == 0) {  //data.total == 0 quando nao encontra nada na API
                     $('#contentorImagens').empty(); //Contentor de Imagens Vazio
                     $("#page").css("display", "none"); //Retiar os buttons de paginacao
                     $("#notfound").css("display", "inline");  //Por a class notfound visivel
                 }
                 else {
-                    Imagensprocurar(data);     
+                    Imagensprocurar(data);
                 }
             },
         });
@@ -60,7 +60,7 @@ function search() {
 
 
 //Buscar todos os dados a API
-function addImagens(data) { 
+function addImagens(data) {
     $('#contentorImagens').empty();
 
     var arrayDeImagens = data;
@@ -72,7 +72,7 @@ function addImagens(data) {
 
 
 //Buscar os dados consoante o que esta escrito na searchbox
-function Imagensprocurar(data) { 
+function Imagensprocurar(data) {
     $('#contentorImagens').empty();
 
     var arrayDeImagens = data;
@@ -84,7 +84,7 @@ function Imagensprocurar(data) {
 
 
 //Criar Imagem
-function criarImagem(imagem) {      
+function criarImagem(imagem) {
 
     //Criar icon
     var i = document.createElement("a");
@@ -93,7 +93,7 @@ function criarImagem(imagem) {
     var tab = "_blank";
     i.setAttribute("target", tab); //Abrir uma nova aba
     i.setAttribute("href", link); //Referencia/Link 
-    
+
 
     //Criar button download
     var btn = document.createElement("button");
@@ -129,7 +129,7 @@ function criarImagem(imagem) {
     //Criar img
     var img = document.createElement("img");
     img.className = "card-img-top";
-    var imgSrc = imagem.urls.raw + "&fit=crop&w=500&h=500"; 
+    var imgSrc = imagem.urls.raw + "&fit=crop&w=500&h=500";
     img.setAttribute("src", imgSrc);
 
 
@@ -156,7 +156,7 @@ function criarImagem(imagem) {
 //Button anterior
 function anterior() {
     if (pagina == 1) {
-        Swal.fire( 
+        Swal.fire(
             'ERRO',
             'Encontra-se na página inicial',
             'error'
@@ -170,40 +170,73 @@ function anterior() {
 
 
 //Refresh à página
-function refreshPage(){
+function refreshPage() {
     location.reload();
 }
 
 
 //Button seguinte
 function seguinte(data) {
-    var endereco = 'https://api.unsplash.com/stats/total?&client_id=7gq1AYl7h4F_zZHQvKnRRRFsl--G2xF16WueDwb77zA';
-    $.ajax({
-        url: endereco,
-        type: "get",
-        async: true,
-        success: function (data, status, response) {
-            var max = data.total_photos/24; //Numero total de fotos a dividir por 24 -> numero de imagens por pagina
-            if (pagina == max ) { 
-                Swal.fire(
-                    'ERRO',
-                    'Encontra-se na ultima pagina',
-                    'error'
-                )
+
+    //Para o Search
+    if (x != 0) { 
+        var inputText = document.getElementById("inputtext");
+        var endereco = 'https://api.unsplash.com/search/photos?query=';
+        var page = '&per_page=24page=1&order_by=latest&page='
+        var clienteAPI = '&client_id=7gq1AYl7h4F_zZHQvKnRRRFsl--G2xF16WueDwb77zA';
+        var url = endereco + inputText.value + page + pagina + clienteAPI;
+        $.ajax({
+            url: url,
+            type: "get",
+            async: true,
+            success: function (data, status, response) {
+                console.log(data);
+                var max = data.total_photos / 24; //Numero total de fotos do "search" a dividir por 24 -> numero de imagens por pagina
+                if (pagina >= max) {
+                    Swal.fire(
+                        'ERRO',
+                        'Encontra-se na ultima pagina',
+                        'error'
+                    )
+                }
+                else {
+                    pagina = pagina + 1;
+                    procura(); 
+                }
             }
-            else {
-                pagina = pagina + 1;
-                procura(); // se clicar no button go o x=1 e vai estar sempre a procurar imagens que eu procurei mesmo que clique na pagina seguinte;
-            }              // senão o x=0 e vai buscar todas as imagens da API e avançado consoante a pagina;
-        }
-    });
+        });
+    }
+    //Para o procura
+    else { 
+        var endereco = 'https://api.unsplash.com/stats/total?&client_id=7gq1AYl7h4F_zZHQvKnRRRFsl--G2xF16WueDwb77zA';
+        $.ajax({
+            url: endereco,
+            type: "get",
+            async: true,
+            success: function (data, status, response) {
+                console.log(data);
+                var max = data.total_photos / 24; //Numero total de fotos a dividir por 24 -> numero de imagens por pagina
+                if (pagina == max) {
+                    Swal.fire(
+                        'ERRO',
+                        'Encontra-se na ultima pagina',
+                        'error'
+                    )
+                }
+                else {
+                    pagina = pagina + 1;
+                    procura(); // se clicar no button go o x=1 e vai estar sempre a procurar imagens que eu procurei mesmo que clique na pagina seguinte;
+                }              // senão o x=0 e vai buscar todas as imagens da API e avançado consoante a pagina;
+            }
+        });
+    }
 }
 
 
 //Button Search
-$('#searchbutton').on("click", ()=>{   //Funcao anonima //Se clicar no button GO ele vai fazer esta funcao pois vai retornar o x=1
-    search(); 
-    x=1;
+$('#searchbutton').on("click", () => {   //Funcao anonima //Se clicar no button GO ele vai fazer esta funcao pois vai retornar o x=1
+    search();
+    x = 1;
 });
 
 
