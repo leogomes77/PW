@@ -1,12 +1,16 @@
-var pagina = 1;
+var pagina = 1; //Pagina
+var x = 0; //Variavel para paginação correta caso esteja a fazer search de uma ima
 
 
 //Ligacao API
 function procura() {
-    var endereco = 'https://api.unsplash.com/photos?per_page=24&page=2&order_by=latest&page='
-    var clienteAPI = '&client_id=dd4e1cb73ca3a1036d4e98d26f72a439141dc17039e1ae79b7bc2a23f3488578'
+    if(x != 0){   //Se clicar no button GO ele vai  retornar o x=1
+        search();
+    }
+    else{  //Vai estar sempre a fazer esta função enquanto eu nao clicar no button go
+    var endereco = 'https://api.unsplash.com/photos?per_page=24&page=1&order_by=latest&page='
+    var clienteAPI = '&client_id=7gq1AYl7h4F_zZHQvKnRRRFsl--G2xF16WueDwb77zA'
     var enderecoPagina = endereco + pagina + clienteAPI;
-
     $.ajax({
         url: enderecoPagina,
         type: "get",
@@ -15,6 +19,7 @@ function procura() {
             addImagens(data);
         }
     });
+    }
 }
 
 
@@ -22,11 +27,11 @@ function procura() {
 function search() {
     var inputText = document.getElementById("inputtext");
     var endereco = 'https://api.unsplash.com/search/photos?query=';
-    var page = '&per_page=24'
-    var clienteAPI = '&client_id=dd4e1cb73ca3a1036d4e98d26f72a439141dc17039e1ae79b7bc2a23f3488578';
-    var url = endereco + inputText.value + page+ pagina+ clienteAPI;
+    var page = '&per_page=24page=2&order_by=latest&page='
+    var clienteAPI = '&client_id=7gq1AYl7h4F_zZHQvKnRRRFsl--G2xF16WueDwb77zA';
+    var url = endereco + inputText.value + page + pagina + clienteAPI;
     if (inputText.value == "") {
-        $('#myModal').modal('show')   //Aparecer o modal
+        $('#myModal').modal('show')  //Aparecer o modal
         $('#closeModal').click(function () {  //Fechar o modal com o close
             $('#myModal').modal('hide');
         })
@@ -40,7 +45,7 @@ function search() {
             type: "GET",
             async: true,
             success: function (data, status, response) {;
-                if (data.total == 0) { 
+                if (data.total == 0) {  //data.total == 0 quando nao encontra nada na API
                     $('#contentorImagens').empty(); //Contentor de Imagens Vazio
                     $("#page").css("display", "none"); //Retiar os buttons de paginacao
                     $("#notfound").css("display", "inline");  //Por a class notfound visivel
@@ -88,12 +93,12 @@ function criarImagem(imagem) {
     var tab = "_blank";
     i.setAttribute("target", tab); //Abrir uma nova aba
     i.setAttribute("href", link); //Referencia/Link
-
+    i.appendChild(btn);
 
     //Criar button download
     var btn = document.createElement("button");
     btn.className = "btn btn-light";
-    btn.appendChild(i);
+   // btn.appendChild(i);
 
 
     //Criar h5
@@ -111,7 +116,7 @@ function criarImagem(imagem) {
     //Criar div button
     var divb = document.createElement("div");
     divb.className = "card-bottom";
-    divb.appendChild(btn);
+    divb.appendChild(i);
 
 
     //Criar div filha
@@ -159,7 +164,8 @@ function anterior() {
     }
     else {
         pagina = pagina - 1;
-        procura();
+        procura(); // se clicar no button go o x=1 e vai estar sempre a procurar imagens que eu procurei mesmo que clique na pagina anterior;
+    }              // senão o x=0 e vai buscar todas as imagens da API e retrocedendo
     }
 }
 
@@ -171,49 +177,51 @@ function refreshPage(){
 
 
 //Button seguinte
-function seguinte() {
-    if (pagina == 50) { //Numero max paginas (POR FAZER)
-        Swal.fire(
-            'ERRO',
-            'Encontra-se na ultima pagina',
-            'error'
-        )
-    }
-    else {
-        pagina = pagina + 1;
-        procura();
-    }
+function seguinte(data) {
+    var endereco = 'https://api.unsplash.com/stats/total?&client_id=7gq1AYl7h4F_zZHQvKnRRRFsl--G2xF16WueDwb77zA';
+    $.ajax({
+        url: endereco,
+        type: "get",
+        async: true,
+        success: function (data, status, response) {
+            var max = data.total_photos/24; //Numero total de fotos a dividir por 24 -> numero de imagens por pagina
+            if (pagina == max ) { 
+                Swal.fire(
+                    'ERRO',
+                    'Encontra-se na ultima pagina',
+                    'error'
+                )
+            }
+            else {
+                pagina = pagina + 1;
+                procura(); // se clicar no button go o x=1 e vai estar sempre a procurar imagens que eu procurei mesmo que clique na pagina seguinte;
+            }              // senão o x=0 e vai buscar todas as imagens da API e avançado consoante a pagina;
+        }
+    });
 }
 
 
 //Button Search
-function programarButtonSearch() {
-    $('#searchbutton').on("click", search);
-}
+$('#searchbutton').on("click", ()=>{   //Funcao anonima //Se clicar no button GO ele vai fazer esta funcao pois vai retornar o x=1
+    search(); 
+    x=1;
+});
 
 
 //Carregar a pagina com os dados da API
-function programarCarregamentoPagina() {
-    $(window).on("load", procura);
-}
+$(window).on("load", procura);
+
 
 //Button refresh
-function programarRefresh() {
-    $('#notfoundb').on("click", refreshPage);
-}
+$('#notfoundb').on("click", refreshPage);
 
 
 //Buttons paginacao
-function programarBotoesPaginacao() {
-    var botaoAnterior = document.getElementById("anterior");
-    var botaoSeguinte = document.getElementById("seguinte");
+var botaoAnterior = document.getElementById("anterior");
+var botaoSeguinte = document.getElementById("seguinte");
 
-    botaoAnterior.addEventListener("click", anterior);
-    botaoSeguinte.addEventListener("click", seguinte);
-}
+botaoAnterior.addEventListener("click", anterior);
+botaoSeguinte.addEventListener("click", seguinte);
 
 
-programarCarregamentoPagina();
-programarBotoesPaginacao();
-programarButtonSearch(); 
-programarRefresh();
+
