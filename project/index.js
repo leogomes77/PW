@@ -1,5 +1,5 @@
 var pagina = 1; //Pagina
-var x = 0; //Variavel para paginação correta caso esteja a fazer search de uma ima
+var x = 0; //Variavel para paginação correta caso esteja a fazer search de uma imagem
 
 
 //Ligacao API
@@ -166,7 +166,6 @@ function anterior() {
         pagina = pagina - 1;
         procura(); // se clicar no button go o x=1 e vai estar sempre a procurar imagens que eu procurei mesmo que clique na pagina anterior;
     }              // senão o x=0 e vai buscar todas as imagens da API e retrocedendo
-    }
 }
 
 
