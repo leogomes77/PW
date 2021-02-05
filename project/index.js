@@ -92,13 +92,13 @@ function criarImagem(imagem) {
     var link = imagem.urls.regular;
     var tab = "_blank";
     i.setAttribute("target", tab); //Abrir uma nova aba
-    i.setAttribute("href", link); //Referencia/Link
-    i.appendChild(btn);
+    i.setAttribute("href", link); //Referencia/Link 
+    
 
     //Criar button download
     var btn = document.createElement("button");
     btn.className = "btn btn-light";
-   // btn.appendChild(i);
+    btn.appendChild(i);
 
 
     //Criar h5
@@ -116,7 +116,7 @@ function criarImagem(imagem) {
     //Criar div button
     var divb = document.createElement("div");
     divb.className = "card-bottom";
-    divb.appendChild(i);
+    divb.appendChild(btn);
 
 
     //Criar div filha
@@ -212,7 +212,8 @@ $(window).on("load", procura);
 
 
 //Button refresh
-$('#notfoundb').on("click", refreshPage);
+$('#notfoundb').on("click", refreshPage); //Refresh ao clicar no button back to home
+$('#icon').on("click", refreshPage); //Refresh ao clicar no icon da navbar
 
 
 //Buttons paginacao
